@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="grid-container grid-container-basket">
+        {% if basket is defined %}
+            {% for basketEntry in basket.basketEntries %}
+                <div class="grid-item-basket">
+                    {% set product = basketEntry.product %}
+                    <p>{{ product.name }}</p>
+                    <p>{{ product.price }} €</p>
+
+                    {% set picturePath = product.picturePath ?: 'product_import/dummy-product.png' %}
+                    <img class="product-image" src="{{ asset(picturePath) }}" alt="product" width="300" height="200">
+                </div>
+            {% endfor %}
+
+            <h1 style="color: white">Weiter zur Bestellung</h1>
+        {% else %}
+            <div class="grid-item-basket">
+                <h1>Keine Produkte im Warenkorb</h1>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

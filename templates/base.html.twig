@@ -2,10 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Shop{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% endblock %}
 
         {% block javascripts %}
@@ -13,8 +14,16 @@
         {% endblock %}
     </head>
     <body>
-        <div style="position: absolute;">
+        <div style="position: absolute; margin: 10px">
             <a href="{{ path('index') }}" style="color: white; text-decoration: none;">Home</a>
+{#            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}#}
+            {% if not app.user %}
+                <a href="{{ path('app_register') }}" style="padding-left: 30px; color: white; text-decoration: none;">Register</a>
+                <a href="{{ path('app_login') }}" style="padding-left: 30px; color: white; text-decoration: none;">Login</a>
+            {% else %}
+                <a href="{{ path('app_logout') }}" style="padding-left: 30px; color: white; text-decoration: none;">Logout</a>
+                <a href="{{ path('basket') }}" style="padding-left: 30px; color: white; text-decoration: none;">Warenkorb</a>
+            {% endif %}
         </div>
         {% block body %}{% endblock %}
     </body>

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="grid-container grid-container-register">
+    <div class="grid-item-register">
+        <h1>Registrierung</h1>
+
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Passwort'
+        }) }}
+        {{ form_row(registrationForm.firstName, {
+            label: 'Vorname'
+        }) }}
+        {{ form_row(registrationForm.lastName, {
+            label: 'Nachname'
+        }) }}
+        {{ form_row(registrationForm.zipCode, {
+            label: 'Postleitzahl'
+        }) }}
+        {{ form_row(registrationForm.city, {
+            label: 'Stadt'
+        }) }}
+        {{ form_row(registrationForm.street, {
+            label: 'Straße'
+        }) }}
+        {{ form_row(registrationForm.phoneNumber, {
+            label: 'Telefonnummer'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms, {
+            label: 'Datenschutz Bestimmungen zustimmen'
+        }) }}
+
+        <button type="submit" class="btn">Registrieren</button>
+        {{ form_end(registrationForm) }}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="grid-container grid-container-product">
+        <div class="grid-item-product-detail">
+            <p class="product-name">Name: {{ product.name }}</p>
+            <p class="product-number">Nummer: {{ product.productNumber }}</p>
+
+            {% set picturePath = product.picturePath ?: 'product_import/dummy-product.png' %}
+
+            <img class="product-image" src="{{ asset(picturePath) }}" alt="product" width="300" height="200">
+
+            <p class="product-price">Preis: {{ product.price }} €</p>
+            {#            <a class="add-to-cart-btn" href="{{ path('add_to_basket') }}">In den Warenkorb</a> #}
+
+            {% if app.user %}
+                {# note: only show add-to-cart button if user is logged in #}
+                <form action="{{ path('add_to_basket') }}" method="post">
+                    <button class="add-to-cart-btn" type="submit">In den Warenkorb</button>
+                    <input type="hidden" id="productId" name="productId" value="{{ product.id }}"/>
+                </form>
+            {% else %}
+                <p class="product-login-info">Bitte anmelden um das Produkt zum Warenkorb hinzuzufügen</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -5,7 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <div class="">
-	<h1>Welcome</h1>
+    <div class="grid-container grid-container-homepage">
+        {% for product in products %}
+            <div class="grid-item-homepage">
+                <a class="product-name" href="{{ path('product_detail', {'id': product.id}) }}">Name: {{ product.name }}</a>
+
+                <p class="product-number">Nummer: {{ product.productNumber }}</p>
+
+                {% set picturePath = product.picturePath ?: 'product_import/dummy-product.png' %}
+
+                <img class="product-image" src="{{ asset(picturePath) }}" alt="product" width="300" height="200">
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
